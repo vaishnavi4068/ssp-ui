@@ -1,2 +1,2 @@
 # ssp-ui
-demo IDP
+demo IDP repo
