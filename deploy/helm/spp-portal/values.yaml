@@ -1,0 +1,34 @@
+global:
+  gcpProjectId: "microdrive-dev"
+  gkeClusterName: "md-dev"
+  gcpRegion: "us-east1"
+  namespace: "spp-portal"
+  workloadIdentityPool: "microdrive-dev.svc.id.goog"
+  nodeSelector:
+    workload: "spp"
+  tolerations:
+    - key: "dedicated"
+      operator: "Equal"
+      value: "spp"
+      effect: "NoSchedule"
+
+images:
+  registry: "us-east1-docker.pkg.dev/microdrive-dev/spp"
+  repo: "spp-portal"
+  tag: "latest"
+  pullPolicy: "IfNotPresent"
+
+replicas:
+  portal: 2
+
+runtimeConfig:
+  apiUrl: "http://ssp-cp.spp-platform.svc.cluster.local:8000"
+  defaultCmekKey: "projects/microdrive-dev/locations/us-east1/keyRings/spp-keyring/cryptoKeys/spp-gcs-cmek"
+
+loadBalancer:
+  internalServiceEnabled: true
+  internalIngressEnabled: false
+  corporateCidrRanges:
+    - "10.0.0.0/8"
+    - "172.16.0.0/12"
+    - "192.168.0.0/16"
