@@ -437,7 +437,7 @@ describe('GCS Bucket Request Validation & Requested Document Shape (ADR-SVC-001)
     expect(preview.publicAccessPrevention).toBe('enforced');
     expect(preview.retentionLocked).toBe(false);
     expect(preview.kmsKeyName).toBe(
-      'projects/spp-kms-nonprod/locations/us-east1/keyRings/spp-nonprod-use1/cryptoKeys/gcs-default'
+      'projects/microdrive-dev/locations/us-east1/keyRings/spp-keyring/cryptoKeys/spp-gcs-cmek'
     );
     expect(preview.guardrailTrace.map((t) => t.rule_id)).toEqual([
       'GCS-UBLA-001',

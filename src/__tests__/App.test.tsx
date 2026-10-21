@@ -36,9 +36,10 @@ describe('SPP Portal UI MVP Integration', () => {
     fireEvent.click(screen.getByTestId('request-btn-gcs_bucket'));
 
     expect(screen.getByTestId('gcs-request-form')).toBeInTheDocument();
-    expect(screen.getByTestId('live-bucket-name')).toHaveTextContent(
-      'spp-nonprod-orders-landing-a1b2'
+    expect(screen.getByTestId('input-cmek-key')).toHaveValue(
+      'projects/microdrive-dev/locations/us-east1/keyRings/spp-keyring/cryptoKeys/spp-gcs-cmek'
     );
+    expect(screen.getByTestId('input-cmek-key')).toHaveAttribute('readonly');
 
     const purposeInput = screen.getByTestId('input-purpose-token');
     fireEvent.change(purposeInput, { target: { value: 'events' } });

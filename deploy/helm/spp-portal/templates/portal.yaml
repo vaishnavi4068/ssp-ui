@@ -11,8 +11,7 @@ data:
   config.js: |
     window.__SPP_CONFIG__ = {
       API_BASE_URL: {{ .Values.runtimeConfig.apiUrl | quote }},
-      DEFAULT_CMEK_KEY_TEMPLATE: {{ .Values.runtimeConfig.defaultCmekKeyTemplate | quote }},
-      MICRODRIVE_CMEK_KEY: {{ .Values.runtimeConfig.microdriveCmekKey | quote }}
+      DEFAULT_CMEK_KEY: {{ .Values.runtimeConfig.defaultCmekKey | quote }}
     };
 ---
 apiVersion: apps/v1
@@ -49,10 +48,8 @@ spec:
           env:
             - name: SPP_API_URL
               value: {{ .Values.runtimeConfig.apiUrl | quote }}
-            - name: SPP_DEFAULT_CMEK_KEY_TEMPLATE
-              value: {{ .Values.runtimeConfig.defaultCmekKeyTemplate | quote }}
-            - name: SPP_MICRODRIVE_CMEK_KEY
-              value: {{ .Values.runtimeConfig.microdriveCmekKey | quote }}
+            - name: SPP_DEFAULT_CMEK_KEY
+              value: {{ .Values.runtimeConfig.defaultCmekKey | quote }}
           ports:
             - containerPort: 8080
               name: http

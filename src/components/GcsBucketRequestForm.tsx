@@ -845,25 +845,23 @@ export const GcsBucketRequestForm: React.FC<GcsBucketRequestFormProps> = ({ onBa
                 </select>
               </div>
 
-              {/* CMEK Key from Config */}
+              {/* CMEK Key from Config (Read-Only Default) */}
               <div className="space-y-1 sm:col-span-2">
                 <label className="text-xs font-semibold flex items-center justify-between">
                   <span>3.3 Required CMEK Key in locations/us-east1 (GCS-ENC-001) *</span>
-                  <span className="text-[10px] font-mono text-[#008060]">
-                    Config template: {runtimeCfg.DEFAULT_CMEK_KEY_TEMPLATE.slice(0, 38)}...
+                  <span className="inline-flex items-center gap-1 text-[10px] font-mono text-[#008060]">
+                    <Lock className="w-3 h-3" /> Read-Only Default
                   </span>
                 </label>
                 <input
                   type="text"
                   data-testid="input-cmek-key"
-                  value={formState.cmekKeyOverride || guardrailPreview.kmsKeyName}
-                  onChange={(e) => handleFieldChange('cmekKeyOverride', e.target.value)}
-                  className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-neutral-700 bg-[#F8F9FA] dark:bg-[#1C2023] text-xs font-mono focus:outline-none focus:border-[#008060]"
+                  value={guardrailPreview.kmsKeyName}
+                  readOnly
+                  className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-900 text-xs font-mono text-slate-600 dark:text-slate-300 cursor-not-allowed"
                 />
                 <p className="text-[11px] text-slate-500">
-                  Resolved automatically from runtime config by{' '}
-                  <code className="font-mono">(lob, environment_type, location=&quot;us-east1&quot;)</code>. Must
-                  reside in <code className="font-mono">locations/us-east1</code>.
+                  Default CMEK key from runtime config (<code className="font-mono">projects/microdrive-dev/locations/us-east1/keyRings/spp-keyring/cryptoKeys/spp-gcs-cmek</code>).
                 </p>
               </div>
 
