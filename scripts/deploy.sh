@@ -9,6 +9,7 @@ set -euo pipefail
 #   Node Pool   : spp-pool (workload=spp, dedicated=spp:NoSchedule)
 #   Namespace   : spp-portal
 #   Registry    : us-east1-docker.pkg.dev/microdrive-dev/spp
+#   ControlPlane: http://ssp-cp.spp-platform.svc.cluster.local:8000
 # ---------------------------------------------------------------------------
 
 PROJECT_ID="${GCP_PROJECT_ID:-microdrive-dev}"
@@ -17,7 +18,7 @@ CLUSTER="${GKE_CLUSTER_NAME:-md-dev}"
 NAMESPACE="${PORTAL_K8S_NAMESPACE:-spp-portal}"
 REGISTRY="${IMAGE_REGISTRY:-us-east1-docker.pkg.dev/${PROJECT_ID}/spp}"
 IMAGE_TAG="${IMAGE_TAG:-$(git rev-parse --short HEAD 2>/dev/null || echo v1.0.0)}"
-SPP_API_URL="${SPP_API_URL:-}"
+SPP_API_URL="${SPP_API_URL:-http://ssp-cp.spp-platform.svc.cluster.local:8000}"
 
 echo "=================================================================="
 echo "SPP Portal UI Deployment"
@@ -26,7 +27,7 @@ echo "Cluster     : ${CLUSTER} (${REGION})"
 echo "Namespace   : ${NAMESPACE}"
 echo "Registry    : ${REGISTRY}"
 echo "Image       : ${REGISTRY}/spp-portal:${IMAGE_TAG}"
-echo "API URL     : ${SPP_API_URL:-(same-origin / not configured)}"
+echo "API URL     : ${SPP_API_URL}"
 echo "=================================================================="
 
 echo "[1/3] Submitting Cloud Build to build & push spp-portal:${IMAGE_TAG}..."

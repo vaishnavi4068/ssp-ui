@@ -1,6 +1,9 @@
 export const DEFAULT_GCS_CMEK_KEY =
   'projects/microdrive-dev/locations/us-east1/keyRings/spp-keyring/cryptoKeys/spp-gcs-cmek';
 
+export const DEFAULT_SPP_API_URL =
+  'http://ssp-cp.spp-platform.svc.cluster.local:8000';
+
 export interface SppRuntimeConfig {
   API_BASE_URL: string;
   DEFAULT_CMEK_KEY: string;
@@ -23,7 +26,13 @@ export function getRuntimeConfig(): SppRuntimeConfig {
       ? (import.meta.env.VITE_SPP_DEFAULT_CMEK_KEY as string | undefined)
       : undefined;
 
-  const apiBaseUrl = (winCfg?.API_BASE_URL || envApiUrl || '').replace(/\/+$/, '');
+  const rawApiBase =
+    winCfg?.API_BASE_URL !== undefined
+      ? winCfg.API_BASE_URL
+      : envApiUrl !== undefined
+      ? envApiUrl
+      : DEFAULT_SPP_API_URL;
+  const apiBaseUrl = rawApiBase.replace(/\/+$/, '');
   const defaultCmekKey =
     winCfg?.DEFAULT_CMEK_KEY || envCmekKey || DEFAULT_GCS_CMEK_KEY;
 
