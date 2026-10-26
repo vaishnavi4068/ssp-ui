@@ -33,28 +33,28 @@ npm run build
 npm run dev
 ```
 
-## Build & Deploy Commands (GCP Cloud Build + GKE `md-dev`)
+## Build & Deploy Commands (GCP Cloud Build + SPP GKE cluster)
 
 ```bash
 # 1. Build & push container image via Cloud Build
 SHORT_SHA="$(git rev-parse --short HEAD)"
 gcloud builds submit \
-  --project="microdrive-dev" \
+  --project="<spp-factory-host-project-id>" \
   --region="us-east1" \
   --config=cloudbuild.yaml \
-  --substitutions="_REGISTRY=us-east1-docker.pkg.dev/microdrive-dev/spp,_TAG=${SHORT_SHA}" \
+  --substitutions="_REGISTRY=us-east1-docker.pkg.dev/<spp-factory-host-project-id>/spp,_TAG=${SHORT_SHA}" \
   .
 
 # 2. Fetch GKE credentials & deploy Helm chart into namespace spp-portal
-gcloud container clusters get-credentials "md-dev" \
-  --project="microdrive-dev" \
+gcloud container clusters get-credentials "<spp-gke-cluster>" \
+  --project="<spp-factory-host-project-id>" \
   --region="us-east1" \
   --dns-endpoint
 
 helm upgrade --install spp-portal ./deploy/helm/spp-portal \
   --namespace spp-portal \
   --create-namespace \
-  --set images.registry="us-east1-docker.pkg.dev/microdrive-dev/spp" \
+  --set images.registry="us-east1-docker.pkg.dev/<spp-factory-host-project-id>/spp" \
   --set images.tag="${SHORT_SHA}" \
   --wait \
   --timeout 10m
