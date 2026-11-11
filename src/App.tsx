@@ -16,6 +16,7 @@ import {
 import { ServiceCatalog } from './components/ServiceCatalog';
 import { GcsBucketRequestForm } from './components/GcsBucketRequestForm';
 import { EmptyStatePage } from './components/EmptyStatePage';
+import { AssistantSidekick } from './components/AssistantSidekick';
 import { RESOURCE_KIND_REGISTRY } from './lib/kindRegistry';
 import { getRuntimeConfig } from './lib/config';
 
@@ -331,6 +332,7 @@ export function App() {
           )}
         </main>
       </div>
+      <AssistantSidekick />
     </div>
   );
 }
