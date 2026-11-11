@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { MessageCircle, X, Send, Loader2 } from 'lucide-react';
 import {
   createAssistantConversation,
