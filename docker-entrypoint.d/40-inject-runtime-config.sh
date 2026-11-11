@@ -10,3 +10,7 @@ window.__SPP_CONFIG__ = {
   DEFAULT_CMEK_KEY: "${DEFAULT_CMEK_KEY}"
 };
 EOF
+
+if [ "$#" -gt 0 ]; then
+  exec "$@"
+fi

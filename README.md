@@ -2,7 +2,7 @@
 
 Self-Service Provisioning Platform (**SPP Portal**) UI MVP for Google Cloud Platform (`us-east1`).
 
-Built with **React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui patterns**, mirroring the Shopify Polaris Infrastructure Storefront aesthetic (`17-shopify-polar-commerce`).
+Built with **React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui patterns**, mirroring the Shopify Polaris Infrastructure Storefront aesthetic (`17-shopify-polar-commerce`). The container image runs a **Go** static server (`cmd/portal`) that serves the built SPA on port 8080.
 
 ## Scope & Architecture Alignment (`ssp-doc`)
 
